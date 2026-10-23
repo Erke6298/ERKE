@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON — Digital Experience</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #08080e;
+    --purple: #9b5cff;
+    --pink: #ed65ff;
+    --text: #f7f4ff;
+    --muted: #9290a5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: #702cff;
+    filter: blur(180px);
+    opacity: .18;
+    top: -250px;
+    right: -100px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background: #ff36ce;
+    filter: blur(180px);
+    opacity: .09;
+    bottom: -250px;
+    left: -100px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    width: min(1180px, 90%);
+    margin: auto;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.logo span {
+    color: var(--purple);
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 13px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.header-btn {
+    border: 1px solid #393044;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.header-btn:hover {
+    border-color: var(--purple);
+    box-shadow: 0 0 25px #9b5cff35;
+}
+
+.hero {
+    width: min(1180px, 90%);
+    min-height: 78vh;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 40px;
+    padding: 55px 0 80px;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #30263f;
+    background: #17111f;
+    padding: 10px 16px;
+    border-radius: 30px;
+    color: #d5baff;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a875ff;
+    box-shadow: 0 0 12px #a875ff;
+}
+
+h1 {
+    font-size: clamp(48px, 6.5vw, 86px);
+    line-height: .99;
+    letter-spacing: -6px;
+    font-weight: 900;
+}
+
+.gradient {
+    background: linear-gradient(100deg, #a16aff, #f28bff, #8d7bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.description {
+    color: var(--muted);
+    max-width: 450px;
+    line-height: 1.9;
+    font-size: 14px;
+    margin: 27px 0 32px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 23px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(110deg, #9857ff, #b46bff);
+    color: white;
+    box-shadow: 0 8px 35px #8e48ff30;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px #a05bff60;
+}
+
+.btn-secondary {
+    border: 1px solid #393044;
+    color: #d7d2e4;
+}
+
+.btn-secondary:hover {
+    background: #191420;
+    border-color: #8f5de0;
+}
+
+.visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    perspective: 1000px;
+}
+
+.orb {
+    width: min(340px, 80vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    background:
+        radial-gradient(circle at 32% 28%, #f4d4ff 0%, #c18aff 7%,
+        #8240eb 23%, #3b176f 45%, #120b24 68%, #08080e 74%);
+    box-shadow:
+        inset -25px -25px 60px #0009,
+        0 0 60px #a04cff25,
+        0 0 140px #7c32ff18;
+    animation: float 6s ease-in-out infinite;
+}
+
+.orb::before {
+    content: "";
+    position: absolute;
+    inset: -25px;
+    border: 1px solid #a76cff70;
+    border-radius: 50%;
+    transform: rotateX(70deg) rotateZ(-20deg);
+}
+
+.orb::after {
+    content: "";
+    position: absolute;
+    inset: -48px;
+    border: 1px solid #ec7bff35;
+    border-radius: 50%;
+    transform: rotateX(70deg) rotateZ(30deg);
+}
+
+.orb-core {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 25%;
+    left: 24%;
+    background: #fff;
+    border-radius: 50%;
+    filter: blur(45px);
+    opacity: .7;
+}
+
+.float-card {
+    position: absolute;
+    background: #17141fdd;
+    backdrop-filter: blur(20px);
+    border: 1px solid #ffffff17;
+    border-radius: 16px;
+    padding: 17px 20px;
+    box-shadow: 0 20px 60px #0005;
+}
+
+.card-top {
+    top: 40px;
+    right: 0;
+    animation: float 5s ease-in-out infinite;
+}
+
+.card-bottom {
+    bottom: 45px;
+    left: 0;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.card-label {
+    color: var(--muted);
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.card-value {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.card-value span {
+    color: #b68aff;
+}
+
+.stats {
+    width: min(1180px, 90%);
+    margin: 0 auto 50px;
+    border-top: 1px solid #ffffff12;
+    border-bottom: 1px solid #ffffff12;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 30px 0;
+}
+
+.stat {
+    text-align: center;
+    border-right: 1px solid #ffffff12;
+}
+
+.stat:last-child {
+    border: none;
+}
+
+.stat h2 {
+    font-size: 30px;
+    margin-bottom: 9px;
+}
+
+.stat p {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.section {
+    width: min(1180px, 90%);
+    margin: 110px auto;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-heading h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature {
+    padding: 30px;
+    background: linear-gradient(145deg, #17131f, #0d0c13);
+    border: 1px solid #ffffff10;
+    border-radius: 22px;
+    transition: .35s;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+    border-color: #9b5cff70;
+    box-shadow: 0 20px 60px #8b40ff12;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: #a05aff19;
+    color: #c7a1ff;
+    font-size: 23px;
+    margin-bottom: 25px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    margin-bottom: 13px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.cta {
+    width: min(1180px, 90%);
+    margin: 100px auto;
+    padding: 65px 25px;
+    text-align: center;
+    border: 1px solid #a36aff30;
+    border-radius: 28px;
+    background:
+        radial-gradient(ellipse at 50% 120%, #8e44ff30, transparent 60%),
+        #100d17;
+}
+
+.cta h2 {
+    font-size: clamp(30px, 5vw, 50px);
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+}
+
+.cta p {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 13px;
+}
+
+footer {
+    padding: 30px 5%;
+    border-top: 1px solid #ffffff10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer strong {
+    color: white;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .8s, transform .8s;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#topBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #a36aff50;
+    border-radius: 14px;
+    background: #17111fee;
+    color: white;
+    cursor: pointer;
+    display: none;
+    font-size: 20px;
+    z-index: 5;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@media (max-width: 800px) {
+    nav { gap: 14px; }
+    nav a { font-size: 11px; }
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+    }
+    .visual { min-height: 380px; }
+    .features { grid-template-columns: 1fr; }
+    .feature { padding: 25px; }
+}
+
+@media (max-width: 520px) {
+    header { flex-wrap: wrap; }
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+    }
+    h1 { letter-spacing: -3px; }
+    .stats { gap: 10px; }
+    .stat h2 { font-size: 23px; }
+    .stat p { font-size: 9px; }
+    .float-card { padding: 12px; }
+    .card-value { font-size: 18px; }
+    footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<header id="home">
+    <a href="#home" class="logo">NEON<span>.</span></a>
+
+    <nav>
+        <a href="#home">Басты бет</a>
+        <a href="#features">Мүмкіндіктер</a>
+        <a href="#about">Біз туралы</a>
+    </nav>
+
+    <a href="#contact" class="header-btn">Бастау ↗</a>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="tag">
+                <span class="dot"></span>
+                NEXT GENERATION DESIGN
+            </div>
+
+            <h1>
+                Болашаққа<br>
+                <span class="gradient">қадам бас.</span>
+            </h1>
+
+            <p class="description">
+                Идеяларды ерекше цифрлық тәжірибеге айналдыр.
+                Заманауи дизайн, креативті ойлау және технология
+                бір жерде тоғысады.
+            </p>
+
+            <div class="actions">
+                <a href="#features" class="btn btn-primary">
+                    Зерттеуді бастау <span>↗</span>
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    Толығырақ
+                </a>
+            </div>
+        </div>
+
+        <div class="visual reveal">
+            <div class="orb">
+                <div class="orb-core"></div>
+            </div>
+
+            <div class="float-card card-top">
+                <div class="card-label">DESIGN QUALITY</div>
+                <div class="card-value">99<span>%</span></div>
+            </div>
+
+            <div class="float-card card-bottom">
+                <div class="card-label">CREATIVE MODE</div>
+                <div class="card-value">ACTIVE <span>✦</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats reveal" id="about">
+        <div class="stat">
+            <h2>∞</h2>
+            <p>ШЕКСІЗ ИДЕЯЛАР</p>
+        </div>
+        <div class="stat">
+            <h2>24/7</h2>
+            <p>ӘРҚАШАН ҚОЛЖЕТІМДІ</p>
+        </div>
+        <div class="stat">
+            <h2>100%</h2>
+            <p>КРЕАТИВТІЛІК</p>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <div class="section-heading reveal">
+            <h2>Жаңа деңгейге <span class="gradient">өт.</span></h2>
+            <p>
+                Қарапайым идеядан ерекше нәтижеге дейін.<br>
+                Әрбір деталь өз орнында.
+            </p>
+        </div>
+
+        <div class="features">
+            <article class="feature reveal">
+                <div class="feature-icon">✦</div>
+                <h3>Ерекше дизайн</h3>
+                <p>
+                    Неон түстері, жұмсақ градиенттер және
+                    әдемі шыны эффектілері бар заманауи интерфейс.
+                </p>
+            </article>
+
+            <article class="feature reveal">
+                <div class="feature-icon">◈</div>
+                <h3>Жылдам жұмыс</h3>
+                <p>
+                    Жеңіл құрылым, таза код және артық
+                    кітапханаларсыз жасалған интерфейс.
+                </p>
+            </article>
+
+            <article class="feature reveal">
+                <div class="feature-icon">⌘</div>
+                <h3>Барлық экранға</h3>
+                <p>
+                    Компьютерде, планшетте және телефонда
+                    экран өлшеміне бейімделетін дизайн.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="cta reveal" id="contact">
+        <h2>Өз идеяңды <span class="gradient">баста.</span></h2>
+        <p>Келесі ерекше жобаң дәл осы жерден басталуы мүмкін.</p>
+        <button class="btn btn-primary" id="startBtn">
+            Let's go <span>↗</span>
+        </button>
+    </section>
+</main>
+
+<footer>
+    <a href="#home" class="logo">NEON<span>.</span></a>
+    <p>© 2026 NEON. Барлық құқықтар қорғалған.</p>
+    <a href="#home"><strong>Жоғары ↑</strong></a>
+</footer>
+
+<button id="topBtn" aria-label="Жоғарыға көтерілу">↑</button>
+
+<script>
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.12
+});
+
+revealElements.forEach(element => observer.observe(element));
+
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", () => {
+    topBtn.style.display = window.scrollY > 350 ? "block" : "none";
+});
+
+topBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+document.getElementById("startBtn").addEventListener("click", () => {
+    alert("Жаңа идеяңды жүзеге асыруға уақыт келді! 🚀");
+});
+</script>
+
+</body>
+</html>
