@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR — Beyond Ordinary</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Manrope:wght@400;500;700;800&display=swap');
+
+:root {
+    --bg: #090909;
+    --gold: #e7c477;
+    --red: #ff3939;
+    --white: #f4f0e9;
+    --gray: #85827d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: .08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    width: 90%;
+    margin: auto;
+    height: 95px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ffffff19;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 25px;
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    font-size: 11px;
+    color: #aaa7a1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+.menu-btn {
+    border: 1px solid #51442c;
+    padding: 13px 21px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.menu-btn:hover {
+    background: var(--gold);
+    color: black;
+}
+
+.hero {
+    min-height: 760px;
+    width: 90%;
+    max-width: 1450px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "N°01";
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 4px;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 70px 0;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 32px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 35px;
+    height: 1px;
+    background: var(--gold);
+}
+
+h1 {
+    font-size: clamp(55px, 8vw, 115px);
+    line-height: .91;
+    letter-spacing: -7px;
+    font-weight: 800;
+}
+
+h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1px #e7c477;
+}
+
+h1 .red {
+    color: var(--red);
+}
+
+.hero-description {
+    max-width: 380px;
+    margin: 35px 0;
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 2;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 23px;
+    background: var(--gold);
+    color: #111;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    background: white;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px #e7c47730;
+}
+
+.text-link {
+    font-size: 11px;
+    color: #aaa;
+    border-bottom: 1px solid #555;
+    padding-bottom: 7px;
+}
+
+.hero-visual {
+    height: 570px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.ring {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border: 1px solid #e7c47745;
+    border-radius: 50%;
+    transform: rotateX(68deg) rotateZ(-30deg);
+    animation: rotate 18s linear infinite;
+}
+
+.ring.two {
+    width: 360px;
+    height: 510px;
+    border-color: #ff393950;
+    transform: rotateX(65deg) rotateZ(45deg);
+    animation-duration: 24s;
+    animation-direction: reverse;
+}
+
+.sphere {
+    width: min(320px, 65vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    background:
+        radial-gradient(circle at 28% 22%,
+        #fff7db 0%, #f0c875 3%, #ad6b25 10%,
+        #452515 24%, #1b1310 43%, #080808 67%);
+    box-shadow:
+        inset -30px -25px 50px #000,
+        inset 10px 8px 35px #fff2,
+        0 0 80px #b17b2d16;
+    animation: hover 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+.sphere::after {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 18%;
+    left: -10%;
+    top: 40%;
+    border: 2px solid #e7c477;
+    border-radius: 50%;
+    transform: rotate(-28deg);
+    box-shadow: 0 0 18px #e7c47750;
+}
+
+.cross {
+    position: absolute;
+    top: 13%;
+    right: 10%;
+    color: var(--red);
+    font-size: 45px;
+    font-weight: 200;
+}
+
+.side-label {
+    position: absolute;
+    right: -15px;
+    bottom: 80px;
+    writing-mode: vertical-rl;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #79736a;
+}
+
+.ticker {
+    border-top: 1px solid #ffffff20;
+    border-bottom: 1px solid #ffffff20;
+    padding: 23px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #0d0c0b;
+}
+
+.ticker-track {
+    display: inline-flex;
+    gap: 45px;
+    animation: ticker 25s linear infinite;
+}
+
+.ticker span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+}
+
+.ticker .star {
+    color: var(--red);
+}
+
+.section {
+    width: 90%;
+    max-width: 1250px;
+    margin: 140px auto;
+}
+
+.section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 55px;
+}
+
+.small-label {
+    color: var(--red);
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: clamp(35px, 5vw, 65px);
+    line-height: 1.1;
+    letter-spacing: -3px;
+}
+
+.section-note {
+    max-width: 300px;
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #28231c;
+    border: 1px solid #28231c;
+}
+
+.card {
+    background: #0c0c0b;
+    min-height: 310px;
+    padding: 35px 30px;
+    position: relative;
+    transition: .4s;
+}
+
+.card:hover {
+    background: #17130e;
+}
+
+.card-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: var(--gold);
+}
+
+.card-symbol {
+    font-size: 45px;
+    color: var(--red);
+    margin: 45px 0 30px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.card-arrow {
+    position: absolute;
+    top: 32px;
+    right: 30px;
+    font-size: 20px;
+    color: #6e6556;
+}
+
+.statement {
+    border-top: 1px solid #ffffff20;
+    border-bottom: 1px solid #ffffff20;
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.statement p {
+    max-width: 950px;
+    margin: auto;
+    font-size: clamp(27px, 5vw, 60px);
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.statement span {
+    color: var(--gold);
+}
+
+.contact {
+    width: 90%;
+    max-width: 1250px;
+    margin: 130px auto;
+    padding: 75px 30px;
+    text-align: center;
+    border: 1px solid #6b4e24;
+    background:
+        radial-gradient(ellipse at 50% 120%, #8a331c35, transparent 65%),
+        #0d0c0b;
+}
+
+.contact h2 {
+    font-size: clamp(35px, 6vw, 72px);
+    letter-spacing: -4px;
+    margin-bottom: 22px;
+}
+
+.contact p {
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 32px;
+}
+
+footer {
+    border-top: 1px solid #ffffff20;
+    padding: 35px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: var(--gold);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes rotate {
+    to { transform: rotateX(68deg) rotateZ(330deg); }
+}
+
+@keyframes hover {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-18px) rotate(5deg); }
+}
+
+@keyframes ticker {
+    to { transform: translateX(-50%); }
+}
+
+@media (max-width: 850px) {
+    header { height: auto; min-height: 85px; flex-wrap: wrap; padding: 20px 0; }
+    nav { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
+    nav a { font-size: 9px; }
+    .hero { grid-template-columns: 1fr; padding-top: 40px; }
+    .hero-visual { height: 450px; }
+    .section-top { align-items: start; flex-direction: column; }
+    .cards { grid-template-columns: 1fr; }
+    .card { min-height: 260px; }
+}
+
+@media (max-width: 480px) {
+    .logo { font-size: 19px; }
+    .menu-btn { padding: 11px; font-size: 9px; }
+    h1 { letter-spacing: -4px; }
+    .hero-visual { height: 350px; }
+    .ring { width: 300px; height: 300px; }
+    .ring.two { width: 250px; height: 360px; }
+    .side-label { right: 0; }
+    .section { margin: 90px auto; }
+    .contact { padding: 55px 20px; }
+    footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="#home" class="logo">N<span>Ø</span>IR.</a>
+
+    <nav>
+        <a href="#home">Басты бет</a>
+        <a href="#services">Бағыттар</a>
+        <a href="#about">Концепция</a>
+        <a href="#contact">Байланыс</a>
+    </nav>
+
+    <a class="menu-btn" href="#contact">Бастау ↗</a>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-text reveal">
+            <div class="eyebrow">DESIGN WITHOUT LIMITS</div>
+
+            <h1>
+                NOT<br>
+                <span class="outline">MADE</span><br>
+                <span class="red">TO FIT.</span>
+            </h1>
+
+            <p class="hero-description">
+                Әлемге бейімделме. Өз стиліңді жаса.
+                Шектеулерді бұзып, идеяларыңды жаңа
+                деңгейге көтеретін цифрлық кеңістік.
+            </p>
+
+            <div class="hero-actions">
+                <a class="primary-btn" href="#services">
+                    DISCOVER MORE <span>↗</span>
+                </a>
+                <a class="text-link" href="#about">Біздің философия</a>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal">
+            <div class="ring"></div>
+            <div class="ring two"></div>
+            <div class="sphere"></div>
+            <div class="cross">+</div>
+            <div class="side-label">BEYOND ORDINARY — 2026</div>
+        </div>
+    </section>
+
+    <div class="ticker">
+        <div class="ticker-track">
+            <span>CREATE DIFFERENT</span><span class="star">✳</span>
+            <span>BREAK THE RULES</span><span class="star">✳</span>
+            <span>THINK BEYOND</span><span class="star">✳</span>
+            <span>CREATE DIFFERENT</span><span class="star">✳</span>
+            <span>BREAK THE RULES</span><span class="star">✳</span>
+            <span>THINK BEYOND</span><span class="star">✳</span>
+        </div>
+    </div>
+
+    <section class="section" id="services">
+        <div class="section-top reveal">
+            <div>
+                <div class="small-label">01 / WHAT WE DO</div>
+                <h2>Басқаша ойла.<br>Батыл әрекет ет.</h2>
+            </div>
+
+            <p class="section-note">
+                Дизайн — тек сыртқы көрініс емес.
+                Бұл сезім, мінез және өзіңді көрсету тәсілі.
+            </p>
+        </div>
+
+        <div class="cards">
+            <article class="card reveal">
+                <span class="card-number">01 — DESIGN</span>
+                <span class="card-arrow">↗</span>
+                <div class="card-symbol">✳</div>
+                <h3>Visual Identity</h3>
+                <p>
+                    Бір қарағаннан есте қалатын стиль.
+                    Түстер, типография және ерекше визуалды шешімдер.
+                </p>
+            </article>
+
+            <article class="card reveal">
+                <span class="card-number">02 — DIGITAL</span>
+                <span class="card-arrow">↗</span>
+                <div class="card-symbol">◈</div>
+                <h3>Digital Experience</h3>
+                <p>
+                    Заманауи интерфейс, интерактивті элементтер
+                    және пайдаланушыға ыңғайлы навигация.
+                </p>
+            </article>
+
+            <article class="card reveal">
+                <span class="card-number">03 — FUTURE</span>
+                <span class="card-arrow">↗</span>
+                <div class="card-symbol">⌁</div>
+                <h3>Creative Thinking</h3>
+                <p>
+                    Стандартты шешімдерден тыс ойлау.
+                    Жаңа идеялар мен ерекше тәжірибелер.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="statement reveal" id="about">
+        <p>
+            DON'T FOLLOW THE WORLD.
+            <span>MAKE YOUR OWN.</span>
+        </p>
+    </section>
+
+    <section class="contact reveal" id="contact">
+        <div class="small-label">03 / YOUR NEXT MOVE</div>
+        <h2>Ерекше болудан <span style="color:#e7c477">қорықпа.</span></h2>
+        <p>Үлкен идеялар батыл қадамнан басталады.</p>
+        <a class="primary-btn" href="#home">
+            БАСТАУ <span>↗</span>
+        </a>
+    </section>
+</main>
+
+<footer>
+    <a href="#home" class="logo">N<span>Ø</span>IR.</a>
+    <span>INDEPENDENT BY DESIGN · 2026</span>
+    <a href="#home">ЖОҒАРЫ ↑</a>
+</footer>
+
+<script>
+const elements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+elements.forEach(element => observer.observe(element));
+</script>
+
+</body>
+</html>
